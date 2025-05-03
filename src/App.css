@@ -1,5 +1,13 @@
+@font-face {
+  font-family: 'Relative';
+  src: url('./assets/fonts/Relative-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   text-align: center;
+  font-family: 'Relative', sans-serif; /* Apply the Relative font */
 }
 
 .App-logo {
