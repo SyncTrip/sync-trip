@@ -2,27 +2,29 @@ import React from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import theme from '../../theme';
 import { useNavigate } from 'react-router-dom';
+import roomCtrl from '../../domain/controllers/roomCtrl';
 
 const styles = {
     root: {
-        padding: '300px',
+        padding: '3rem',
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
         color: 'black',
-        alignItems: 'flex-start',
+        alignItems: 'center',
         justifyContent: 'center',
-        overflowX: 'hidden',
         boxSizing: 'border-box',
     },
     textInput: {
         display: 'flex',
-        flexDirection: 'row', 
+        flexDirection: 'column', 
         alignItems: 'center', 
         marginTop: '20px',
         gap: '20px',
-        maxWidth: '100%',
+        maxWidth: '40%',
+        width: '100%',
+        marginBottom: '2rem',
     },
     input: {
         display: 'flex',
@@ -33,17 +35,21 @@ const styles = {
         boxSizing: 'border-box',
     },
     buttonJoin: {
+        marginTop:'2rem',
         display: 'flex',
         height: '56px',
-        width: '56px',
-        borderRadius: '8px',
+        width: '12rem',
+        borderRadius: '30px',
         fontSize: '14px',
         color: 'white',
-        backgroundColor: theme.palette.primary.light,
+        backgroundColor: theme.palette.primary.main,
         alignItems: 'center',
         justifyContent: 'center',
         boxSizing: 'border-box',
     },
+    titlejoin:{
+        marginBottom: '2rem',
+    }
 };
 
 
@@ -52,13 +58,28 @@ const JoinView = ({ setRoomCode }) => {
     const [code, setCode] = React.useState('');
 
     const handleInputCode = (code) => {
-        //check if code is valid
-        setRoomCode(code);
+        fetchRoom(code);
     };
+
+    const fetchRoom = async () => {
+        console.log("Fetching room with code:", code);
+        roomCtrl.getRoomById(code)
+        .then((room) => {
+          if (!room) {
+            console.error("Room not found");
+            return;
+          } else {
+            setRoomCode(code);
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching room:", error);
+        });
+      }
 
     return ( 
         <Box style={styles.root}>
-            <Typography variant="h2" color="white">Enter the code</Typography>
+            <Typography variant="h2" color="white" style={styles.titlejoin}>Enter the code of your friend</Typography>
             <Box style={styles.textInput}>
                 <TextField
                     variant="outlined"
