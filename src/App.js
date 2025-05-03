@@ -1,24 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
+import { ThemeProvider } from '@mui/material/styles';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Session from './views/session';
+import Lobby from './views/lobby';
+import theme from './theme';
 import './App.css';
+import { db } from './domain/databaseInitialize.js';
+
 
 function App() {
+  console.log('Theme 1:', theme);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<Navigate to="/session" />} />
+            <Route path="/session" element={<Session />} />
+            <Route path="/lobby" element={<Lobby />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
   );
 }
 
