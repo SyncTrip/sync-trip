@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import theme from "../../theme";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import historyCtrl from "../../domain/controllers/historyCtrl";
+import { UserContext } from "../../context/userContext";
+import { HistoryContext } from "../../context/historyContext";
 
 const styles = {
   root: {
@@ -52,13 +54,53 @@ const styles = {
   },
 };
 
+const handleInput = async (texto, currentUser, history, setHistory, increase) => {
+  try {
+    console.log("History members:", history.members);
+
+    // Find the index of the current user in the members array
+    const userIndex = history.members.findIndex(
+      (member) => member.id === currentUser.id
+    );
+
+    if (userIndex === -1) {
+      console.error("Error: Current user not found in history members");
+      return;
+    }
+
+    console.log("Index:", userIndex);
+    console.log("HistoryRoom:", history.room);
+
+    // Fetch the latest history from the database
+    const updatedHistory = await historyCtrl.getHistory(history.room);
+    console.log("OldHistory:", updatedHistory);
+
+    let durada = updatedHistory?.durada || [];
+    if (!Array.isArray(durada)) {
+      durada = [];
+    }
+
+    // Update the durada array for the current user
+    durada[userIndex] = texto;
+
+    // Update the history in the database
+    const newHistoryID = await historyCtrl.updateHistory(history.room, { durada });
+    const newHistory = await historyCtrl.getHistory(newHistoryID);
+    setHistory(newHistory);
+    console.log("Updated History in Context:", newHistory);
+
+    // Increment the step
+    increase((prev) => prev + 1);
+  } catch (error) {
+    console.error("Error updating history:", error);
+  }
+};
+
 const StayView = ({ increase }) => {
   const navigate = useNavigate();
   const [days, setDays] = useState(0);
-
-  const handleInput = () => {
-    increase((prev) => prev + 1);
-  };
+  const { currentUser } = useContext(UserContext);
+  const { history, setHistory } = useContext(HistoryContext);
 
   return (
     <Box style={styles.root}>
@@ -84,7 +126,7 @@ const StayView = ({ increase }) => {
               days > 0 &&
               days < 120
             ) {
-              handleInput();
+              handleInput(days, currentUser, history, setHistory, increase);
             } else {
               alert("Please enter a valid number of days");
             }

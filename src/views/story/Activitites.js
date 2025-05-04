@@ -85,6 +85,7 @@ const handleInput = async (
       activitats,
     });
     const newHistory = await historyCtrl.getHistory(newHistoryID);
+
     setHistory(newHistory);
     console.log("Updated History in Context:", newHistory);
 
