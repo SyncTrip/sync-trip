@@ -4,7 +4,7 @@ import theme from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { Room } from "../../types/room";
 import roomCtrl from "../../domain/controllers/roomCtrl";
-import historyCtrl from "../../domain/controllers/historyCtrl"
+import historyCtrl from "../../domain/controllers/historyCtrl";
 import { UserContext } from "../../context/userContext";
 import { HistoryContext } from "../../context/historyContext";
 
@@ -65,11 +65,11 @@ const styles = {
   titleroom: {
     marginTop: "1rem",
   },
-  titlecode:{
+  titlecode: {
     marginTop: "rem",
     alignItems: "center",
     justifyContent: "center",
-  }
+  },
 };
 
 const RoomView = (RoomCode) => {
@@ -111,7 +111,7 @@ const RoomView = (RoomCode) => {
         setRoom(room);
         if (room.started) {
           console.log("Room has already started, redirecting to story");
-          navigate("/story")
+          navigate("/story");
         }
       })
       .catch((error) => {
@@ -121,25 +121,31 @@ const RoomView = (RoomCode) => {
 
   const handleStart = async () => {
     console.log("Starting room with code:", RoomCode.roomCode);
-    roomCtrl.updateRoom(RoomCode.roomCode, { started: true })
+    roomCtrl
+      .updateRoom(RoomCode.roomCode, { started: true })
       .then(() => {
         console.log("Room started successfully");
-        historyCtrl.createHistory(RoomCode.roomCode, {members: room.members })
-        .then((history) => {
-          console.log("History created:", history);
-          console.log("HistoryId:", history.id);
-          console.log("HistoryRoom:", history.room);
-          setHistory(history);
-        })
-        .catch((error) => {
-          console.error("Error fetching room:", error);
-        });
-        navigate("/story")
+        const newHistory = {
+          room: RoomCode.roomCode,
+          members: room.members,
+        };
+        historyCtrl
+          .createHistory(RoomCode.roomCode, newHistory)
+          .then((history) => {
+            console.log("History created:", history);
+            console.log("HistoryId:", history.id);
+            console.log("HistoryRoom:", history.room);
+            setHistory(history);
+          })
+          .catch((error) => {
+            console.error("Error fetching room:", error);
+          });
+        navigate("/story");
       })
       .catch((error) => {
         console.error("Error starting room:", error);
       });
-  }
+  };
 
   return room ? (
     <Box style={styles.root}>
@@ -177,9 +183,7 @@ const RoomView = (RoomCode) => {
           <Button
             variant="contained"
             style={styles.buttonStart}
-            onClick={() =>
-              handleStart()
-            }
+            onClick={() => handleStart()}
           >
             Start the journey
           </Button>

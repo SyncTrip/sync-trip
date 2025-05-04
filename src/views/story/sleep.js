@@ -32,7 +32,8 @@ const styles = {
     marginTop: "0",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     height: "auto",
     width: "20rem",
     borderRadius: "30px",
@@ -41,7 +42,7 @@ const styles = {
     backgroundColor: theme.palette.primary.main,
     boxSizing: "border-box",
     padding: "24px 20px",
-    textAlign: "left",
+    textAlign: "center",
     gap: "8px",
   },
 };
@@ -59,7 +60,7 @@ const SleepView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Elegant hotel
+            Elegant hotel
           </Typography>
         </Button>
         <Button
@@ -68,7 +69,7 @@ const SleepView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Hostel with atmosphere
+            Hostel with atmosphere
           </Typography>
         </Button>
         <Button
@@ -77,7 +78,7 @@ const SleepView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Camping under the stars
+            Camping under the stars
           </Typography>
         </Button>
         <Button
@@ -86,7 +87,7 @@ const SleepView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Shared apartment
+            Shared apartment
           </Typography>
         </Button>
       </Box>

@@ -19,6 +19,9 @@ const styles = {
     maxWidth: "100%",
     width: "50%",
     marginBottom: "4rem",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
   buttonGrid: {
     display: "flex",
@@ -32,7 +35,8 @@ const styles = {
     marginTop: "0",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     height: "auto",
     width: "20rem",
     borderRadius: "30px",
@@ -41,7 +45,7 @@ const styles = {
     backgroundColor: theme.palette.primary.main,
     boxSizing: "border-box",
     padding: "24px 20px",
-    textAlign: "left",
+    textAlign: "center",
     gap: "8px",
   },
 };
@@ -50,12 +54,32 @@ const ResultView = ({ increase }) => {
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>
-      Congratulations!
-      </Typography> 
-      <Typography variant="h3" style={styles.pantalla1}>
-You've passed all the tests and are ready to discover the secret. Pack your bags... your mystery destination is:{" "}
+        Congratulations!
       </Typography>
-      <Box style={styles.buttonGrid}>       
+      <Typography variant="h3" style={styles.pantalla1}>
+        You've passed all the tests and are ready to discover the secret. Pack
+        your bags... your mystery destination is:{" "}
+      </Typography>
+      <Box style={styles.buttonGrid}>
+      <Button
+        variant="contained"
+        style={styles.buttonJoin}
+        onClick={() => {
+          increase((prev) => prev + 1);
+        }}
+      >
+        DOWNLOAD PLANNING
+      </Button>
+      <Button
+        variant="contained"
+        style={styles.buttonJoin}
+        onClick={() => {
+          increase((prev) => prev + 1);
+        }}
+      >
+        MODIFY THE TRIP
+      </Button>
+          
       </Box>
     </Box>
   );

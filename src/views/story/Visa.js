@@ -4,7 +4,7 @@ import theme from "../../theme";
 import { useNavigate } from "react-router-dom";
 import { Room } from "../../types/room";
 import userCtrl from "../../domain/controllers/userCtrl";
-import historyCtrl from "../../domain/controllers/historyCtrl"
+import historyCtrl from "../../domain/controllers/historyCtrl";
 import { HistoryContext } from "../../context/historyContext";
 import { UserContext } from "../../context/userContext";
 
@@ -49,28 +49,31 @@ const VisaView = ({ increase }) => {
 
   const handleInput = async (nationalValue) => {
     try {
-        const userIndex = history.members.findIndex(
-            (member) => member.id === currentUser.id
-        );
-        console.log('Index', userIndex);
-        console.log('HistoryRoom', history.room)
-        const updatedHistory = await historyCtrl.getHistory(history.room);
-        console.log('OldHistory', updatedHistory)
+      const userIndex = history.members.findIndex(
+        (member) => member.id === currentUser.id
+      );
+      console.log("Index", userIndex);
+      console.log("HistoryRoom", history.room);
+      const updatedHistory = await historyCtrl.getHistory(history.room);
+      console.log("OldHistory", updatedHistory);
 
-        let national = updatedHistory.national || [];
-        if (!Array.isArray(national)) {
-            national = [];
-        }
-        national[userIndex] = nationalValue;
+      let national = updatedHistory.national || [];
+      if (!Array.isArray(national)) {
+        national = [];
+      }
+      national[userIndex] = nationalValue;
 
-        const newHistory = await historyCtrl.updateHistory(history.room, { national });
-        setHistory(newHistory);
+      const newHistoryID = await historyCtrl.updateHistory(history.room, {
+        national,
+      });
+      const newHistory = await historyCtrl.getHistory(newHistoryID);
+      setHistory(newHistory);
 
-        increase((prev) => prev + 1);
+      increase((prev) => prev + 1);
     } catch (error) {
-        console.error("Error updating history:", error);
+      console.error("Error updating history:", error);
     }
-};
+  };
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>

@@ -50,8 +50,8 @@ const styles = {
   },
   input: {
     width: "20%",
-    padding: "10px", // Ajusta según lo necesites
-    fontSize: "1rem", // Ajusta el tamaño de fuente si es muy grande
+    padding: "10px",
+    fontSize: "1rem",
   },
 };
 
@@ -73,7 +73,7 @@ const AgeView = ({ increase }) => {
           console.error("Error updating user:", error);
         });
     } else {
-      console.error("User not found in context"); 
+      console.error("User not found in context");
     }
   };
 

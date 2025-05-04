@@ -32,7 +32,8 @@ const styles = {
     marginTop: "0",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     height: "auto",
     width: "20rem",
     borderRadius: "30px",
@@ -41,7 +42,7 @@ const styles = {
     backgroundColor: theme.palette.primary.main,
     boxSizing: "border-box",
     padding: "24px 20px",
-    textAlign: "left",
+    textAlign: "center",
     gap: "8px",
   },
 };

@@ -32,7 +32,8 @@ const styles = {
     marginTop: "0",
     display: "flex",
     flexDirection: "column",
-    alignItems: "flex-start",
+    alignItems: "center",
+    justifyContent: "center",
     height: "auto",
     width: "20rem",
     borderRadius: "30px",
@@ -41,7 +42,7 @@ const styles = {
     backgroundColor: theme.palette.primary.main,
     boxSizing: "border-box",
     padding: "24px 20px",
-    textAlign: "left",
+    textAlign: "center",
     gap: "8px",
   },
 };
@@ -50,7 +51,7 @@ const AwayView = ({ increase }) => {
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>
-      How far are you willing to travel to find the secret?{" "}
+        How far are you willing to travel to find the secret?{" "}
       </Typography>
       <Box style={styles.buttonGrid}>
         <Button
@@ -59,7 +60,7 @@ const AwayView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Only in my country, I don't want jet lag
+            Only in my country, I don't want jet lag
           </Typography>
         </Button>
         <Button
@@ -68,7 +69,7 @@ const AwayView = ({ increase }) => {
           onClick={() => increase((prev) => prev + 1)}
         >
           <Typography variant="h3" sx={{ color: "white", fontWeight: 600 }}>
-          Anywhere in the world, the adventure is worth it!{" "}
+            Anywhere in the world, the adventure is worth it!{" "}
           </Typography>
         </Button>
       </Box>

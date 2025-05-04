@@ -29,10 +29,25 @@ const historyCtrl = {
 
     async getHistory(room) {
         try {
+            console.log('Getting history for room:', room);
             const historyRef = ref(db, `history/${room}`);
             const snapshot = await get(historyRef);
             if (snapshot.exists()) {
-                return snapshot.val();
+                const data = snapshot.val();
+    
+                // Validate and fill missing properties
+                if (!Array.isArray(data.members)) data.members = [];
+                const length = data.members.length;
+    
+                data.origen = Array.isArray(data.origen) ? data.origen : new Array(length).fill("none");
+                data.diners = Array.isArray(data.diners) ? data.diners : new Array(length).fill(0);
+                data.destinacio = Array.isArray(data.destinacio) ? data.destinacio : new Array(length).fill('');
+                data.activitats = Array.isArray(data.activitats) ? data.activitats : new Array(length).fill('');
+                data.nacional = Array.isArray(data.nacional) ? data.nacional : new Array(length).fill(false);
+                data.durada = Array.isArray(data.durada) ? data.durada : new Array(length).fill(0);
+                data.cotxe = Array.isArray(data.cotxe) ? data.cotxe : new Array(length).fill(false);
+    
+                return data;
             } else {
                 console.log('No history data available');
                 return null;

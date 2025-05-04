@@ -16,13 +16,13 @@ const styles = {
     background: "white",
   },
   pantalla1: {
-    marginTop: "0",   
+    marginTop: "0",
     color: "black",
-    maxWidth: "30rem",  
+    maxWidth: "30rem",
     width: "100%",
     marginBottom: "2rem",
-    textAlign: "center", 
-    display: "block",      
+    textAlign: "center",
+    display: "block",
     fontSize: "1.5rem",
   },
   textInput: {
@@ -54,7 +54,7 @@ const styles = {
 
 const StayView = ({ increase }) => {
   const navigate = useNavigate();
-  const [days, setDays] = useState(0); 
+  const [days, setDays] = useState(0);
 
   const handleInput = () => {
     increase((prev) => prev + 1);
@@ -63,20 +63,27 @@ const StayView = ({ increase }) => {
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>
-        The secret is only revealed to those who know how to manage their time. How much time can you dedicate to the search?      </Typography>
+        The secret is only revealed to those who know how to manage their time.
+        How much time can you dedicate to the search?
+      </Typography>
       <Box style={styles.textInput}>
         <TextField
           style={styles.input}
           variant="outlined"
           placeholder="Stay in days"
           onChange={(e) => setDays(e.target.value)}
-
         />
         <Button
           variant="contained"
           style={styles.buttonJoin}
           onClick={() => {
-            if (days && !isNaN(days) && Number.isInteger(Number(days)) && days > 0 && days < 120) {
+            if (
+              days &&
+              !isNaN(days) &&
+              Number.isInteger(Number(days)) &&
+              days > 0 &&
+              days < 120
+            ) {
               handleInput();
             } else {
               alert("Please enter a valid number of days");

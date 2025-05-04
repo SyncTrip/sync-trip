@@ -36,21 +36,21 @@ const styles = {
     justifyContent: "center",
   },
   buttonexit: {
-    marginTop: '1rem',
-    color: 'black',                
-    background: 'none',            
-    border: 'none',                
-    textDecoration: 'underline',   
-    fontSize: '1.5rem',              
-    cursor: 'pointer',             
-    padding: '8px 16px',           
-    outline: 'none',               
-    display: 'inline',
-  }
+    marginTop: "1rem",
+    color: "black",
+    background: "none",
+    border: "none",
+    textDecoration: "underline",
+    fontSize: "1.5rem",
+    cursor: "pointer",
+    padding: "8px 16px",
+    outline: "none",
+    display: "inline",
+  },
 };
 
 const WelcomeView = ({ increase }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>
@@ -66,9 +66,16 @@ const WelcomeView = ({ increase }) => {
         >
           Accept mission
         </Button>
-        <Box style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <Button style={styles.buttonexit}
-        onClick={() => navigate('/session', {state:{type: 'index'}})}> Exit </Button>
+        <Box
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <Button
+            style={styles.buttonexit}
+            onClick={() => navigate("/session", { state: { type: "index" } })}
+          >
+            {" "}
+            Exit{" "}
+          </Button>
         </Box>
       </Box>
     </Box>
