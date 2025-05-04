@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Button, Typography } from "@mui/material";
 import theme from "../../theme";
+import { useNavigate } from "react-router-dom";
 
 const styles = {
   root: {
@@ -51,6 +52,8 @@ const styles = {
 };
 
 const ResultView = ({ increase }) => {
+  const navigate = useNavigate();
+
   return (
     <Box style={styles.root}>
       <Typography variant="h2" style={styles.pantalla1}>
@@ -58,28 +61,27 @@ const ResultView = ({ increase }) => {
       </Typography>
       <Typography variant="h3" style={styles.pantalla1}>
         You've passed all the tests and are ready to discover the secret. Pack
-        your bags... your mystery destination is:{" "}
+        your bags... your mystery destination is:
       </Typography>
       <Box style={styles.buttonGrid}>
-      <Button
-        variant="contained"
-        style={styles.buttonJoin}
-        onClick={() => {
-          increase((prev) => prev + 1);
-        }}
-      >
-        DOWNLOAD PLANNING
-      </Button>
-      <Button
-        variant="contained"
-        style={styles.buttonJoin}
-        onClick={() => {
-          increase((prev) => prev + 1);
-        }}
-      >
-        MODIFY THE TRIP
-      </Button>
-          
+        <Button
+          variant="contained"
+          style={styles.buttonJoin}
+          onClick={() => {
+            increase((prev) => prev + 1);
+          }}
+        >
+          DOWNLOAD PLANNING
+        </Button>
+        <Button
+          variant="contained"
+          style={styles.buttonJoin}
+          onClick={() => {
+            navigate("/session");
+          }}
+        >
+          MODIFY THE TRIP
+        </Button>
       </Box>
     </Box>
   );
